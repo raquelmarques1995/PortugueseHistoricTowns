@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registo</title>
+    <link rel="shortcut icon" href="imagens/logo.png">
+    <link href="style.css" rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body class="d-flex flex-column min-w-100" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: black">
+    <!--Header-->
+    <header class="row">
+      <div class="col-sm-12 pt-4">
+        <img src="imagens/logo.png" alt="Logótipo" />
+        <span class="text-white mb-2"> Aldeias Históricas</span>
+      </div>
+    </header>
+
+    <!--Navbar-->
+    <div id="navbar" class="">
+      <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="homepage.html">
+            <img src="imagens/castle.svg" classe="d-inline-block" width="30" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavbar"
+            aria-controls="collapsibleNavbar"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a
+                  id="aldeia"
+                  class="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  href="#"
+                  >Aldeias Históricas</a
+                >
+                <ul class="dropdown-menu">
+                  <li class="nav-item">
+                    <a href="homepage.html" class="dropdown-item"
+                      >Página Inicial</a
+                    >
+                  </li>
+                  <li><hr class="dropdown-divider" style="border-top: solid #76323F"/></li>
+                  <li class="nav-item">
+                    <a href="almeida.html" class="dropdown-item">Almeida</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="dropdown-item">Castelo Rodrigo</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="dropdown-item">Linhares da Beira</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="dropdown-item">Marialva</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="dropdown-item">Monsanto</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <!-- Modal para Login-->
+                <a
+                  id="login"
+                  class="nav-link"
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalLogin"
+                  >Login</a
+                >
+                <div class="modal fade" id="modalLogin">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5">Login</h1>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Utilizador</p>
+                        <input
+                          type="text"
+                          class="form-control border-secondary"
+                        />
+                      </div>
+                      <div class="modal-body">
+                        <p>Password</p>
+                        <input
+                          type="text"
+                          class="form-control border-secondary"
+                        />
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="button"
+                          data-bs-dismiss="modal"
+                        >
+                          Fechar
+                        </button>
+                        <button type="button" class="button">Entrar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <main>
+      <div class="row col-sm-12" style="padding-top:80px; padding-bottom: 80px">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-3">
+          <form>
+            <h1>Registo</h1>
+            <br />
+            <table>
+              <tr>
+                <td>
+                  <label for="nome">Nome</label>
+                  <input
+                    type="text"
+                    id="nome"
+                    placeholder="Introduza o seu nome"
+                    required
+                    autofocus
+                    size="45" 
+                    style="margin-bottom: 10px"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="Introduza o seu email"
+                    required
+                    size="45"
+                    style="margin-bottom: 10px"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="utilizador">Nome do Utilizador</label>
+                  <input
+                    type="text"
+                    id="utilizador"
+                    placeholder="Introduza o seu nome de utilizador"
+                    minlength="6"
+                    maxlength="20"
+                    required
+                    size="45"
+                  />
+                  <p style="margin-bottom: 10px; font-size: small">
+                    O nome de utilizador tem de ter entre 6 a 20 caracteres.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="password">Password</label>
+                  <input
+                    type="password"
+                    id="password"
+                    placeholder="Introduza a sua password"
+                    minlength="6"
+                    maxlength="15"
+                    required
+                    size="45"
+                  />
+                  <p style="font-size: small">
+                    A password tem de ter 6 a 15 caracteres.
+                  </p>
+                </td>
+              </tr>
+              <tr style="border: 0px">
+                <td id="legenda" style="border: 0px" colspan="2">
+                  <input class="buttoninfo"
+                    type="submit"
+                    value="Criar conta"
+                    style="height: 35px; width: 100px; color: white; background-color: #565656;"
+                  />
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+        <div class="col-sm-6 ms-5">
+          <img
+            src="imagens/castelo rodrigo/castelo_rodrigo2.jpg"
+            width="90%"
+          />
+        </div>
+      </div>
+    </main>
+    <!-- Footer-->
+    <footer class="row">
+      <div id="footer" class="py-2">
+        <p id="ftext">&copy Citeforma 2024 | Raquel Sousa Marques</p>
+      </div>
+    </footer>
+  </body>
+</html>

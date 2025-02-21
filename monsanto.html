@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monsanto</title>
+    <link rel="shortcut icon" href="imagens/logo.png">
+
+    <link href="style.css" rel="stylesheet" />
+    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    
+
+    <script>
+      fetch(
+        "https://api.ipma.pt/open-data/forecast/meteorology/cities/daily/1050200.json"
+      )
+        .then((response) => {
+          if (!response.ok) {
+            document.getElementById("previsao").innerHTML =
+              '<tr><td colspan="4">Erro na previsão do tempo</td></tr>';
+          }
+          return response.json();
+        })
+
+        .then((data) => {
+          let table = document.getElementById("previsao");
+
+          //IMAGENS
+          const weatherImages = {
+            0: "imagens/sol.png",
+            1: "imagens/sol.png",
+            2: "imagens/nublado.png",
+            3: "imagens/sol.png",
+            4: "imagens/nublado.png",
+            6: "imagens/aguaceiros.png",
+            7: "imagens/aguaceiros.png",
+            8: "imagens/aguaceiros.png",
+            9: "imagens/aguaceiros.png",
+            10: "imagens/chuva.png",
+            11: "imagens/aguaceiros.png",
+            12: "imagens/chuva.png",
+            15: "imagens/chuva.png",
+            16: "imagens/nublado.png",
+            17: "imagens/nublado.png",
+            18: "imagens/chuva.png",
+            19: "imagens/aguaceiros.png",
+            20: "imagens/aguaceiros.png",
+            21: "imagens/nublado.png",
+            22: "imagens/nublado.png",
+            23: "imagens/aguaceiros.png",
+            24: "imagens/nublado.png",
+            25: "imagens/nublado.png",
+            26: "imagens/nublado.png",
+            27: "imagens/nublado.png",
+            28: "imagens/nublado.png",
+            29: "imagens/chuva.png",
+            30: "imagens/chuva.png",
+          };
+
+          data.data.forEach((day) => {
+            //VERIFICAR SE ALGUM DOS VALORES RECEBIDOS DA API NÃO ESTÁ DEFINIDO
+            const tMin = day.tMin !== undefined ? day.tMin + "ºC" : "N/A";
+            const tMax = day.tMax !== undefined ? day.tMax + "ºC" : "N/A";
+            const precipitaProb =
+              day.precipitaProb !== undefined ? day.precipitaProb : "N/A";
+
+            //IMAGEM DA PREVISÃO DO TEMPO (IMAGEM POR DEFAULT)
+            const weatherTypeImage =
+              weatherImages[day.idWeatherType] || "imagens/sol.png";
+
+            //CONCATENAÇÃO DAS STRINGS QUE TÊM ESCRITO O HTML QUE IRÁ SER INSERIDO NA DIV ABAIXO DA PREVISãO DO TEMPO
+            let row = table.insertRow(-1);
+
+            let cellDate = row.insertCell(0);
+            let cellImage = row.insertCell(1);
+            let cellMin = row.insertCell(2);
+            let cellMax = row.insertCell(3);
+
+            cellDate.innerHTML = day.forecastDate;
+            cellImage.innerHTML =
+              '<img src="' + weatherTypeImage + '" alt="" width=50px"/>'; //TODO - ver o alt da imagem
+            cellMin.innerHTML = tMin;
+            cellMax.innerHTML = tMax;
+          });
+        })
+        .catch((error) => {
+          console.error("Erro:", error);
+          document.getElementById("previsao").innerHTML =
+            '<tr><td colspan="4">Erro na previsão do tempo</td></tr>';
+        });
+    </script>
+  </head>
+
+  <body style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: black">
+    <!--HEADER-->
+    <header id="header" class="row">
+      <div class="col-sm-12 pt-4">
+        <img src="imagens/logo.png" alt="Logótipo" />
+        <span class=" mb-2"> Aldeias Históricas</span>
+      </div>
+    </header>
+
+    <!--NAVBAR-->
+    <div id="navbar" class="row">
+      <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="homepage.html">
+            <img src="imagens/castle.svg" classe="d-inline-block" width="30" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavbar"
+            aria-controls="collapsibleNavbar"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a
+                  id="aldeia"
+                  class="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  href="#"
+                  >Aldeias Históricas</a
+                >
+                <ul class="dropdown-menu" style="z-index: 1021;">
+                  <li class="nav-item">
+                    <a href="homepage.html" class="dropdown-item"
+                      >Página Inicial</a
+                    >
+                  </li>
+                  <li><hr class="dropdown-divider border-top: solid #76323F"/></li>
+                  <li class="nav-item">
+                    <a href="almeida.html" class="dropdown-item">Almeida</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="castelorodrigo.html" class="dropdown-item">Castelo Rodrigo</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="linharesbeira.html" class="dropdown-item">Linhares da Beira</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="marialva.html" class="dropdown-item">Marialva</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <!-- LOGIN-->
+                <a
+                  id="login"
+                  class="nav-link"
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalLogin"
+                  >Login</a
+                >
+                <div class="modal fade" id="modalLogin">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5">Login</h1>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Utilizador</p>
+                        <input
+                          type="text"
+                          class="form-control border-secondary"
+                        />
+                      </div>
+                      <div class="modal-body">
+                        <p>Password</p>
+                        <input
+                          type="text"
+                          class="form-control border-secondary"
+                        />
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="button"
+                          data-bs-dismiss="modal"
+                        >
+                          Fechar
+                        </button>
+                        <button type="button" class="button">Entrar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="nav-item">
+                <!-- REGISTO-->
+                <a id="registo" class="nav-link" href="registo.html" target="blank">Registo</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div id="topicos" class="row sticky-top">
+      <a class="col-sm-2 align-items-center topico" href="#header"
+        ><p><i class="fa-solid fa-arrow-up"></i> Início</p></a
+      >
+      <a class="col-sm-2 align-items-center topico" href="#historia"
+        ><p><i class="fa-solid fa-book"></i> História</p></a
+      >
+      <a class="col-sm-2 align-items-center topico" href="#historia"
+        ><p><i class="fa-solid fa-map-pin"></i> Mapa e Previsão <i class="fa-solid fa-cloud"></i></p></a
+      >
+      <a class="col-sm-2 align-items-center topico" href="#previsao"
+        ><p><i class="fa-solid fa-video"></i> Media</p></a
+      >
+      <a class="col-sm-2 align-items-center topico" href="#visitar"
+        ><p> <i class="fa-solid fa-map"></i> O que visitar</p></a
+      >
+      <a class="col-sm-2 align-items-center topico" href="#comer"
+        ><p><i class="fa-solid fa-utensils"></i> Onde comer e Onde ficar <i class="fa-solid fa-bed"></i> </p></a
+      >
+    </div>
+
+    <main class="row justify-content-center">
+      <!--INTRODUÇÃO-->
+      <h1 id="titulo">Monsanto</h1>
+      <div id="introducao" class="col-sm-10">
+        <p>
+          Alcandorada num cabeço que se impõe ao olhar na maior parte dos horizontes, a Aldeia Histórica de Portugal de Monsanto detém um encanto singular, para o que contribuem os dois títulos atribuídos no séc. XX – Aldeia Mais Portuguesa de Portugal, em 1938, e o de Aldeia Histórica em 1995. Ícone turístico da região, Monsanto é uma experiência peculiar para quem a visita. Concederam-lhe foral D. Afonso Henriques, D. Sancho I, D. Sancho II e D. Manuel . A parte mais antiga está no ponto mais alto, onde os Templários construíram uma cerca com uma torre de menagem.
+        </p>
+      </div>
+
+      <!-- CAROUSEL-->
+      <section class="row col-sm-10 mt-1 justify-content-center">
+        <section
+          id="carouselaldeia"
+          class="carousel slide mb-3"
+          data-bs-ride="carousel"
+          data-bs-interval="2000"
+        >
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#carouselaldeia"
+              data-bs-slide-to="0"
+              class="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselaldeia"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselaldeia"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselaldeia"
+              data-bs-slide-to="3"
+              aria-label="Slide 4"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselaldeia"
+              data-bs-slide-to="4"
+              aria-label="Slide 5"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselaldeia"
+              data-bs-slide-to="5"
+              aria-label="Slide 6"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselaldeia"
+              data-bs-slide-to="6"
+              aria-label="Slide 7"
+            ></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                src="imagens/monsanto/monsanto2.jpg"
+                class="d-block w-100"
+                alt="Monsanto2"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="imagens/monsanto/monsanto3.jpg"
+                class="d-block w-100"
+                alt="Monsanto3"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="imagens/monsanto/monsanto4.jpg"
+                class="d-block w-100"
+                alt="Monsanto4"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="imagens/monsanto/monsanto5.jpg"
+                class="d-block w-100"
+                alt="Monsanto5"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="imagens/monsanto/monsanto6.jpg"
+                class="d-block w-100"
+                alt="Monsanto6"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="imagens/monsanto/monsanto7.jpg"
+                class="d-block w-100"
+                alt="Monsanto7"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="imagens/monsanto/monsanto8.jpg"
+                class="d-block w-100"
+                alt="Monsanto8"
+              />
+            </div>
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselaldeia"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselaldeia"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </section>
+      </section>
+      
+
+      <!--HISTÓRIA, MAPS E PREVISÃO-->
+      <section id="historia" class="row">
+        <hr style="margin-top: 40px" style="border-top: solid #76323F"/>
+        <div id="texto" class="col-sm-8 mb-3">
+          <!--HISTÓRIA-->
+          <h2 id="titulo">História</h2>
+          <p>
+            Monsanto situa-se a nordeste das Terras de Idanha, aninhada na encosta de uma elevação escarpada - o cabeço de Monsanto (Mons Sanctus) - que irrompe abruptamente na campina e que, no seu ponto mais elevado, atinge 758 metros. Pelas várias vertentes da encosta e no sopé do monte, existem lugarejos dispersos, atestando a deslocação populacional em direção à planície.
+          </p>
+          <p>
+            Trata-se de um local muito antigo, onde se regista a presença humana desde o paleolítico. Vestígios arqueológicos dão conta de um castro lusitano e da ocupação romana no denominado campo de S. Lourenço, no sopé do monte. Vestígios da permanência visigótica e árabe foram também encontrados.
+          </p>
+          <p>
+            D. Afonso Henriques conquista Monsanto aos Mouros e em 1165 faz a sua doação à Ordem dos Templários, que sob as ordens de D. Gualdim Pais, mandou edificar o Castelo. O primeiro Foral foi concedido por este rei em 1174, sucessivamente confirmado por D. Sancho I (1190) e D. Afonso II (1217). A D. Sancho I se deve também a repovoação e reedificação da fortaleza, desmantelada nas lutas contra Leão, novamente reparadas um século depois, pelos Templários. D. Dinis deu-lhe Carta de Feira em 1308, a realizar junto da ermida de S. Pedro de Vir-a-Corça. El-Rei D. Manuel I outorgou-lhe Foral Novo (1510) e deu-lhe a categoria de vila. Em meados do séc. XVII, D. Luís de Haro, ministro de Filipe IV, tenta o cerco a Monsanto, sem sucesso. Mais tarde, no início do século XVIII, o Duque de Berwick cerca também Monsanto, mas o exército português, comandado pelo Marquês de Minas, derrotou o invasor nos contrafortes da escarpada elevação.
+
+          </p>
+          <p>
+            Em 1758, Monsanto era sede de concelho, privilégio que manteve até 1853. No século XIX, o imponente Castelo medieval de Monsanto foi parcialmente destruído pela explosão acidental do paiol de munições.
+          </p>
+          <p>
+            A gloriosa resistência aos invasores (romanos ou árabes - não se sabe bem) comemora-se na Festa de Santa Cruz, deitando-se das muralhas do castelo simbólicos cântaros com flores, levando as mulheres ao cimo das torres as tradicionais bonecas de trapos - as marafonas.
+          </p>  
+          <p>
+            A Capela de S. Pedro de Vir-à-Corça ou Ver-a-Corça, Imóvel de Interesse Público, situada na base do monte nos arredores da povoação, entre os lugares de Eugénia e Carroqueiro, é um templo românico construído em granito, datando provavelmente do séc. XIII, em que se destaca uma rosácea.
+          </p>
+          <p>
+            A Estação Arqueológica romana de São Lourenço, Imóvel de Interesse Público, situada na Freguesia de Monsanto, corresponde presumivelmente a uma vila romana que integra um complexo termal. São também conhecidos quatro túmulos romanos em granito. Perto do local das ruínas, vê-se também um troço de pavimento.
+          </p>
+
+        </div>
+
+        <!--Maps-->
+        <div id="maps" class="row col-sm-4 mt-2 d-flex justify-content-center">
+          <h3 style="text-align: center">Como chegar</h3>
+          <iframe
+            id="map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d195604.5803303612!2d-7.1943695113538375!3d40.00126416258203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd3d75bd5000d04d%3A0x824a112737bb26!2sMonsanto!5e0!3m2!1sen!2spt!4v1731604501999!5m2!1sen!2spt"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+          <p></p>
+          <hr style="border-top: solid #76323F"/>
+
+          <!--PREVISÕES-->
+          <h3 style="text-align: center">Como vai estar o tempo</h3>
+          <table id="previsao"></table>
+        </div>
+      </section>
+
+      <!--VÍDEOS SOBRE A ALDEIA-->
+      <section  class="row videos mt-2 mb-2">
+        <div
+          class="col-sm-6 py-5 d-flex align-items-center justify-content-center"
+        >
+          <iframe
+            class="video"
+            src="https://www.youtube.com/embed/L3UodEhk7Fw?si=R05Qy-fuTuf58cML"
+            title="Monsanto | Historical Villages of Portugal"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+        <div
+          class="col-sm-6 py-5 d-flex align-items-center justify-content-center"
+        >
+          <iframe
+            class="video"
+            src="https://www.youtube.com/embed/yx7KlG1nHJ4?si=ZuyAX93g3RtzCoiC"
+            title="Aldeia Histórica de Monsanto"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </section>
+
+      <!--O QUE VISITAR SECTION-->
+      <section id="visitar" class="row col-sm-12 informacao">
+        <h2 class="titulo" style="text-align: center">
+          O que visitar
+        </h2>
+        <div class="row">
+          <div class="col-sm-4 mt-3 d-flex">
+            <div class="card h-100">
+              <img class="card-img-top" src="imagens/monsanto/casaZeca.jpeg"
+              alt="Casa de Zeca Afonso"/>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title mb-3"><i class="fa-solid fa-monument"></i> Casa de Zeca Afonso</h5>
+                <p class="card-text">
+                  É um projeto da Associação José Afonso e do Município de Idanha-a-Nova que tem como objetivo transformar a casa de Zeca Afonso numa casa-museu dedicada ao cantor que aqui procurou encontrar um local de inspiração e repouso.
+                </p>
+                <a href="https://aldeiashistoricasdeportugal.com/local/casa-de-zeca-afonso/" target="_blank" class="btn buttoninfo mt-auto" style="color: white; background-color: #565656;">Mais informações</a>
+              </div>
+            </div>
+          </div>
+        
+          <div class="col-sm-4 mt-3 d-flex">
+            <div class="card h-100">
+              <img class="card-img-top" src="imagens/monsanto/cidadela.jpg"
+              alt="Citadela"/>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title mb-3"><i class="fa-solid fa-monument"></i> Citadela</h5>
+                <p class="card-text">
+                  O castelo que a Ordem do Templo aqui construiu seguiu a fórmula simplificada de fortificação adaptada a pequenos castelos, plena de atualidade para a época, consistindo num pátio muralhado e uma só porta.
+                </p>
+                <a href="https://aldeiashistoricasdeportugal.com/local/cidadela/" target="_blank" class="btn buttoninfo mt-auto" style="color: white; background-color: #565656;">Mais informações</a>
+              </div>
+            </div>
+          </div>
+        
+          <div class="col-sm-4 mt-3 d-flex">
+            <div class="card h-100">
+              <img class="card-img-top" src="imagens/monsanto/capela.jpg"
+              alt="Capela de Sº João"/>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title mb-3"><i class="fa-solid fa-monument"></i> Capela de Sº João</h5>
+                <p class="card-text">
+                  Neste recanto rochoso aplanado na aba nascente do castelo encontram-se as ruínas da capela de S. João. Desta pouco ou nada se sabe. Os restos das paredes mostram um pequeno templo constituído por nave e capela-mor e uma só porta axial, o arco triunfal é reconstrução recente pouco rigorosa e desproporcionada.
+                </p>
+                <a href="https://aldeiashistoricasdeportugal.com/local/capela-de-s-joao/" target="_blank" class="btn buttoninfo mt-auto" style="color: white; background-color: #565656;">Mais informações</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- ONDE COMER SECTION -->
+      <section id="comer" class="row col-6 informacao justify-content-center px-0">
+        <h2 class="titulo text-center">Onde comer</h2>
+        <div class="col-sm-6 mt-3 d-flex">
+          <div class="card card-equal-height mx-auto d-flex flex-column">
+            <img class="card-img-top" src="imagens/monsanto/restaurante.jpg"
+            alt="Restaurante Casa da Velha Fonte"/>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title"><i class="fa-solid fa-utensils"></i> Restaurante Casa da Velha Fonte</h5>
+              <p class="card-text">
+                A Casa da Velha Fonte proporciona o deleite de sabores, uma combinação de produtos feliz que cumpre rigorosamente a combinação de alimentos e de produtos existentes na ancestralidade, sem que se alheie da modernidade e contemporaneidade da gastronomia.
+              </p>
+              <p>Horário:<br>ter - dom : 10:00 - 20:00</p>
+              <a href="https://aldeiashistoricasdeportugal.com/local/casa-da-velha-fonte/" target="_blank" class="btn buttoninfo mt-auto" style="color: white; background-color: #565656;">Mais informações</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ONDE FICAR SECTION -->
+      <section id="alojamento" class="row col-6 informacao justify-content-center px-0">
+        <h2 class="titulo text-center">Onde ficar</h2>
+        <div class="col-sm-6 mt-3 d-flex">
+          <div class="card card-equal-height mx-auto d-flex flex-column">
+            <img class="card-img-top" src="imagens/monsanto/casa.jpg"
+            alt="Casas da Villa" />
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title"><i class="fa-solid fa-bed"></i> Casas da Villa</h5>
+              <p class="card-text">
+                As Casas da Villa são o resultado de uma paixão por Monsanto, aquela que é considerada como a aldeia mais portuguesa de Portugal. O que torna as Casas da Villa um empreendimento turístico tão especial é que foi concebido para respeitar as suas origens, para estar ao serviço de Monsanto, da aldeia e das suas gentes.
+              </p>
+              <p>Classificação: 3 <i class="fa-solid fa-star"></i></p>
+              <p><i class="fa-solid fa-phone"></i> +351 271 312 352</p>
+              <a href="https://casasdavilla.com/" target="_blank" class="btn buttoninfo mt-auto"style="color: white; background-color: #565656;">Mais informações</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER-->
+    <footer class="row">
+      <div id="footer" class="py-2">
+        <p id="ftext">&copy Citeforma 2024 | Raquel Sousa Marques</p>
+      </div>
+    </footer>
+  </body>
+</html>

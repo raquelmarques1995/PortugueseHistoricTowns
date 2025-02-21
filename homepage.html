@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Home Page</title>
+    <link rel="shortcut icon" href="imagens/logo.png">
+    <link href="style.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+  </head>
+
+    <body style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: black">
+        <!--Header-->
+        <header class="row">
+            <div class="col-sm-12 pt-4">
+                <img src="imagens/logo.png" alt="Logótipo"/>
+                <span class="mb-2"> Aldeias Históricas</span>
+            </div>
+        </header>
+
+        <!--Navbar-->
+        <div id="navbar" class="row">
+            <nav class="navbar navbar-expand-md navbar-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="homepage.html">
+                        <img src="imagens/castle.svg" class="d-inline-block logo" width="30">
+                    </a>        
+                    <button class="navbar-toggler" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#collapsibleNavbar"
+                        aria-controls="collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>      
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a id="aldeia" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Aldeias Históricas</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a href="almeida.html" class="dropdown-item">Almeida</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="castelorodrigo.html" class="dropdown-item">Castelo Rodrigo</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="linharesbeira.html" class="dropdown-item">Linhares da Beira</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="marialva.html" class="dropdown-item">Marialva</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="monsanto.html" class="dropdown-item">Monsanto</a>
+                                    </li>                                
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                
+                                <!-- Modal para Login-->
+                                <a id= "login" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalLogin">Login</a>
+                                <div class="modal fade" id="modalLogin">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5">Login</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                               <p>Utilizador</p> <input type="text" class="form-control border-secondary">
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Password</p> <input type="text" class="form-control border-secondary">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="button" data-bs-dismiss="modal"> Fechar </button>
+                                                <button type="button" class="button">Entrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <!-- Link para Registo-->
+                                <a id = "registo" class="nav-link" href="registo.html" target="blank">Registo</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+
+        <!-- Carrousel   FALTA ADICIONAR AS HIPERLIGAÇÕES-->
+            <main class="row justify-content-center">         
+                <section id="carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                        <button type="button" data-bs-target="#carousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="imagens/almeida/almeida1.jpg" class="d-block w-100" alt="Almeida"/>
+                            <div class="carousel-caption">
+                                <a href="almeida.html">
+                                    <h3 class="text-black">Almeida</h3>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="imagens/castelo rodrigo/castelo_rodrigo1.jpg" class="d-block w-100" alt="Castelo Rodrigo"/>
+                            <div class="carousel-caption">
+                                <a href="castelorodrigo.html">
+                                    <h3 class="text-black">Castelo Rodrigo</h3>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="imagens/linhares da beira/linhares1.jpg" class="d-block w-100" alt="Linhares da Beira"/>
+                            <div class="carousel-caption">
+                                <a href="linharesbeira.html">
+                                    <h3 class="text-black">Linhares da Beira</h3>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="imagens/marialva/marialva1.jpg" class="d-block w-100" alt="Marialva"/>
+                            <div class="carousel-caption">
+                                <a href="marialva.html">
+                                    <h3 class="text-black">Marialva</h3>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="imagens/monsanto/monsanto1.jpg" class="d-block w-100" alt="Monsanto"/>
+                            <div class="carousel-caption">
+                                <a href="monsanto.html">
+                                    <h3 class="text-black">Monsanto</h3>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>   
+                </section> 
+
+                <!--Introdução e Vídeo Promocional-->
+                <section id="text_video">
+                    <div id="iframe" class="row mt-1 ms-3">
+                        <div id="text_iframe" class="col-sm-6 pt-2">
+                            <h3> Bem-vindo às Aldeias Históricas de Portugal</h3>
+                            <br/>
+                            <p>Descubra um pedaço autêntico da história de Portugal através das suas aldeias pitorescas e repletas de charme. 
+                                Cada uma destas aldeias preserva séculos de tradição, cultura e beleza natural, proporcionando uma experiência única 
+                                de viagem no tempo. 
+                                Explore o encanto das muralhas medievais, os recantos de pedra e as paisagens deslumbrantes que tornaram estes lugares 
+                                verdadeiros tesouros.
+                                Prepare-se para uma viagem inesquecível
+                                Navegue pelas nossas aldeias e descubra o que cada local tem a oferecer: 
+                                desde monumentos históricos, passeios ao ar livre, a gastronomia local e muito mais. 
+                                Planeie a sua visita e deixe-se encantar pelas Aldeias Históricas de Portugal.
+                            </p>
+                        </div>
+                        <div class ="col-sm-6 py-5 d-flex align-items-center justify-content-center">
+                            <iframe
+                                class="video" 
+                                src="https://www.youtube.com/embed/kP2OtQrVm1o" 
+                                title="VIDEO PROMOCIONAL GRANDE ROTA - ALDEIAS HISTÓRICAS DE PORTUGAL (VERSÃO PORTUGUESA)" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                            </iframe>                
+                        </div>
+                    </div>
+                </section>
+            </main>
+            
+        <!-- Footer-->
+            <footer class="row">
+              <div id="footer" class="py-2">
+                <p id="ftext">&copy Citeforma 2024 | Raquel Sousa Marques</p>
+              </div>
+            </footer>
+    </body>
+</html>

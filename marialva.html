@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marialva</title>
+    <link rel="shortcut icon" href="imagens/logo.png">
+
+    <link href="style.css" rel="stylesheet" />
+    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    
+
+    <script>
+      fetch(
+        "https://api.ipma.pt/open-data/forecast/meteorology/cities/daily/1090700.json"
+      )
+        .then((response) => {
+          if (!response.ok) {
+            document.getElementById("previsao").innerHTML =
+              '<tr><td colspan="4">Erro na previsão do tempo</td></tr>';
+          }
+          return response.json();
+        })
+
+        .then((data) => {
+          let table = document.getElementById("previsao");
+
+          //IMAGENS
+          const weatherImages = {
+            0: "imagens/sol.png",
+            1: "imagens/sol.png",
+            2: "imagens/nublado.png",
+            3: "imagens/sol.png",
+            4: "imagens/nublado.png",
+            6: "imagens/aguaceiros.png",
+            7: "imagens/aguaceiros.png",
+            8: "imagens/aguaceiros.png",
+            9: "imagens/aguaceiros.png",
+            10: "imagens/chuva.png",
+            11: "imagens/aguaceiros.png",
+            12: "imagens/chuva.png",
+            15: "imagens/chuva.png",
+            16: "imagens/nublado.png",
+            17: "imagens/nublado.png",
+            18: "imagens/chuva.png",
+            19: "imagens/aguaceiros.png",
+            20: "imagens/aguaceiros.png",
+            21: "imagens/nublado.png",
+            22: "imagens/nublado.png",
+            23: "imagens/aguaceiros.png",
+            24: "imagens/nublado.png",
+            25: "imagens/nublado.png",
+            26: "imagens/nublado.png",
+            27: "imagens/nublado.png",
+            28: "imagens/nublado.png",
+            29: "imagens/chuva.png",
+            30: "imagens/chuva.png",
+          };
+
+          data.data.forEach((day) => {
+            //VERIFICAR SE ALGUM DOS VALORES RECEBIDOS DA API NÃO ESTÁ DEFINIDO
+            const tMin = day.tMin !== undefined ? day.tMin + "ºC" : "N/A";
+            const tMax = day.tMax !== undefined ? day.tMax + "ºC" : "N/A";
+            const precipitaProb =
+              day.precipitaProb !== undefined ? day.precipitaProb : "N/A";
+
+            //IMAGEM DA PREVISÃO DO TEMPO (IMAGEM POR DEFAULT)
+            const weatherTypeImage =
+              weatherImages[day.idWeatherType] || "imagens/sol.png";
+
+            //CONCATENAÇÃO DAS STRINGS QUE TÊM ESCRITO O HTML QUE IRÁ SER INSERIDO NA DIV ABAIXO DA PREVISãO DO TEMPO
+            let row = table.insertRow(-1);
+
+            let cellDate = row.insertCell(0);
+            let cellImage = row.insertCell(1);
+            let cellMin = row.insertCell(2);
+            let cellMax = row.insertCell(3);
+
+            cellDate.innerHTML = day.forecastDate;
+            cellImage.innerHTML =
+              '<img src="' + weatherTypeImage + '" alt="" width=50px"/>'; //TODO - ver o alt da imagem
+            cellMin.innerHTML = tMin;
+            cellMax.innerHTML = tMax;
+          });
+        })
+        .catch((error) => {
+          console.error("Erro:", error);
+          document.getElementById("previsao").innerHTML =
+            '<tr><td colspan="4">Erro na previsão do tempo</td></tr>';
+        });
+    </script>
+  </head>
+
+  <body style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: black">
+    <!--HEADER-->
+    <header id="header" class="row">
+      <div class="col-sm-12 pt-4">
+        <img src="imagens/logo.png" alt="Logótipo" />
+        <span class=" mb-2"> Aldeias Históricas</span>
+      </div>
+    </header>
+
+    <!--NAVBAR-->
+    <div id="navbar" class="row">
+      <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="homepage.html">
+            <img src="imagens/castle.svg" classe="d-inline-block" width="30" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavbar"
+            aria-controls="collapsibleNavbar"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a
+                  id="aldeia"
+                  class="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  href="#"
+                  >Aldeias Históricas</a
+                >
+                <ul class="dropdown-menu" style="z-index: 1021;">
+                  <li class="nav-item">
+                    <a href="homepage.html" class="dropdown-item"
+                      >Página Inicial</a
+                    >
+                  </li>
+                  <li><hr class="dropdown-divider border-top: solid #76323F"/></li>
+                  <li class="nav-item">
+                    <a href="almeida.html" class="dropdown-item">Almeida</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="castelorodrigo.html" class="dropdown-item">Castelo Rodrigo</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="linharesbeira.html" class="dropdown-item">Linhares da Beira</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="monsanto.html" class="dropdown-item">Monsanto</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <!-- LOGIN-->
+                <a
+                  id="login"
+                  class="nav-link"
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalLogin"
+                  >Login</a
+                >
+                <div class="modal fade" id="modalLogin">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5">Login</h1>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Utilizador</p>
+                        <input
+                          type="text"
+                          class="form-control border-secondary"
+                        />
+                      </div>
+                      <div class="modal-body">
+                        <p>Password</p>
+                        <input
+                          type="text"
+                          class="form-control border-secondary"
+                        />
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="button"
+                          data-bs-dismiss="modal"
+                        >
+                          Fechar
+                        </button>
+                        <button type="button" class="button">Entrar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="nav-item">
+                <!-- REGISTO-->
+                <a id="registo" class="nav-link" href="registo.html" target="blank">Registo</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div id="topicos" class="row sticky-top">
+      <a class="col-sm-2 align-items-center topico" href="#header"
+        ><p><i class="fa-solid fa-arrow-up"></i> Início</p></a
+      >
+      <a class="col-sm-2 align-items-center topico" href="#historia"
+        ><p><i class="fa-solid fa-book"></i> História</p></a
+      >
+      <a class="col-sm-2 align-items-center topico" href="#historia"
+        ><p><i class="fa-solid fa-map-pin"></i> Mapa e Previsão <i class="fa-solid fa-cloud"></i></p></a
+      >
+      <a class="col-sm-2 align-items-center topico" href="#previsao"
+        ><p><i class="fa-solid fa-video"></i> Media</p></a
+      >
+      <a class="col-sm-2 align-items-center topico" href="#visitar"
+        ><p> <i class="fa-solid fa-map"></i> O que visitar</p></a
+      >
+      <a class="col-sm-2 align-items-center topico" href="#comer"
+        ><p><i class="fa-solid fa-utensils"></i> Onde comer e Onde ficar <i class="fa-solid fa-bed"></i> </p></a
+      >
+    </div>
+
+    <main class="row justify-content-center">
+      <!--INTRODUÇÃO-->
+      <h1 id="titulo">Marialva</h1>
+      <div id="introducao" class="col-sm-10">
+        <p>
+          Marialva fica a poucos minutos da cidade de Mêda. Esta Aldeia Histórica, num cenário que revela uma 
+          das relíquias vivas da ancestralidade portuguesa, transporta o visitante às raízes mais profundas da 
+          história do país. As ruas, ladeadas por edifícios resistentes ao tempo, conduzem à cidadela cercada pelas 
+          muralhas cujas ruínas é fácil perder a noção do tempo. Povoada pelos aravos, povo lusitano, foi posteriormente 
+          conquistada pelos romanos, seguidos dos árabes, até à vitória final de D. Fernando, o Magno, em 1063, na sua 
+          emblemática conquita das Beiras. 
+        </p>
+      </div>
+
+      <!-- CAROUSEL-->
+      <section class="row col-sm-10 mt-1 justify-content-center">
+        <section
+          id="carouselaldeia"
+          class="carousel slide mb-3"
+          data-bs-ride="carousel"
+          data-bs-interval="2000"
+        >
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#carouselaldeia"
+              data-bs-slide-to="0"
+              class="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselaldeia"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselaldeia"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselaldeia"
+              data-bs-slide-to="3"
+              aria-label="Slide 4"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselaldeia"
+              data-bs-slide-to="4"
+              aria-label="Slide 5"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselaldeia"
+              data-bs-slide-to="5"
+              aria-label="Slide 6"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselaldeia"
+              data-bs-slide-to="6"
+              aria-label="Slide 7"
+            ></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                src="imagens/marialva/marialva2.jpg"
+                class="d-block w-100"
+                alt="Marialva2"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="imagens/marialva/marialva3.jpg"
+                class="d-block w-100"
+                alt="Marialva3"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="imagens/marialva/marialva4.jpg"
+                class="d-block w-100"
+                alt="Marialva4"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="imagens/marialva/marialva5.jpg"
+                class="d-block w-100"
+                alt="Marialva5"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="imagens/marialva/marialva6.jpg"
+                class="d-block w-100"
+                alt="Marialva6"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="imagens/marialva/marialva7.jpg"
+                class="d-block w-100"
+                alt="Marialva7"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="imagens/marialva/marialva8.jpg"
+                class="d-block w-100"
+                alt="Marialva8"
+              />
+            </div>
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselaldeia"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselaldeia"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </section>
+      </section>
+      
+
+      <!--HISTÓRIA, MAPS E PREVISÃO-->
+      <section id="historia" class="row">
+        <hr style="margin-top: 40px" style="border-top: solid #76323F"/>
+        <div id="texto" class="col-sm-8 mb-3">
+          <!--HISTÓRIA-->
+          <h2 id="titulo">História</h2>
+          <p>
+            A Aldeia de Marialva dista 7 Km da sede do concelho da Mêda, na margem esquerda da ribeira de Marialva. 
+            É constituída por três núcleos distintos: a Cidadela ou Vila no interior do Castelo, agora despovoada; 
+            o Arrabalde que prolonga a Vila para além da zona amuralhada; e a Devesa, situada a sul da cidadela, 
+            que se estende pela planície até à ribeira de Marialva, e assenta sobre a antiga cidade romana.
+          </p>
+          <p>
+            De facto, as origens longínquas de Marialva parecem remontar ao tempo da antiga Cidade de Aravor, fundada pelos Túrdulos no séc. VI a.C. Este castro, situado numa eminência rochosa sobranceira aos campos da Devesa, foi o principal núcleo da comunidade dos Aravos, sendo conhecido por Castro dos Aravos.
+          </p>
+          <p>
+            Despovoada pelas lutas da Reconquista, D. Afonso Henriques mandou-a repovoar e concedeu-lhe o primeiro foral (1179). D. Sancho I reconquistou-a em 1200, altura em que o povoado extravasou a cerca amuralhada, formando-se assim o Arrabalde que apresenta uma malha urbana de traçado predominantemente medieval, onde proliferam igrejas, capelas, casas quinhentistas e senhoriais, a par de um conjunto de habitações rurais com características típicas da casa beirã. D. Dinis, que criou a Feira em 1286, e D. Manuel, que lhe concedeu Foral Novo (1512), procederam a obras no castelo, transformando Marialva numa das mais imponentes e fortes praças de guerra do reino.
+          </p>
+          <p>
+            Dada a localização fronteiriça de Marialva - e estimulada pela Feira (dia 15 de cada mês) que concedia diversos privilégios aos moradores e feirantes - iniciou-se no séc. XIII a fixação de judeus, cujo número aumentou durante o reinado de D. Manuel formando mesmo uma judiaria.
+          </p>
+          <p>
+            D. Afonso V deu o título de Conde de Marialva a D. Vasco Coutinho (1440), que se destacara nas campanhas militares do Norte de África; mais tarde passou a marquesado por mercê de D. Afonso VI (1675), tendo sido primeiro Marquês de Marialva D. António Luís de Menezes, terceiro Conde de Cantanhede, pelo seu papel decisivo na Revolução de 1640..
+          </p>
+          <p>
+            Em 1855 foi suprimido o concelho de Marialva, que passou a englobar o de Vila Nova de Foz Côa. Em 1872, Marialva foi incorporada no concelho de Mêda.
+          </p>  
+        </div>
+
+        <!--Maps-->
+        <div id="maps" class="row col-sm-4 mt-2 d-flex justify-content-center">
+          <h3 style="text-align: center">Como chegar</h3>
+          <iframe
+            id="map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55270.66243411934!2d-7.2724487614788575!3d40.90872988121385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd3c856d4623af97%3A0x500ebbde490cbc0!2sMarialva!5e0!3m2!1sen!2spt!4v1731600698931!5m2!1sen!2spt"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+          <p></p>
+          <hr style="border-top: solid #76323F"/>
+
+          <!--PREVISÕES-->
+          <h3 style="text-align: center">Como vai estar o tempo</h3>
+          <table id="previsao"></table>
+        </div>
+      </section>
+
+      <!--VÍDEOS SOBRE A ALDEIA-->
+      <section  class="row videos mt-2 mb-2">
+        <div
+          class="col-sm-6 py-5 d-flex align-items-center justify-content-center"
+        >
+          <iframe
+            class="video"
+            src="https://www.youtube.com/embed/EsU-1ZhGLHI?si=ctokVu4EpNg6jKlI"
+            title="Marialva Historical Villages of Portugal"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+        <div
+          class="col-sm-6 py-5 d-flex align-items-center justify-content-center"
+        >
+          <iframe
+            class="video"
+            src="https://www.youtube.com/embed/ZRrAcuNuNSA?si=UTThY8a9g2u9rBom"
+            title="Aldeia Histórica de Marialva"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </section>
+
+      <!--O QUE VISITAR SECTION-->
+      <section id="visitar" class="row col-sm-12 informacao">
+        <h2 class="titulo" style="text-align: center">
+          O que visitar
+        </h2>
+        <div class="row">
+          <div class="col-sm-4 mt-3 d-flex">
+            <div class="card h-100">
+              <img class="card-img-top" src="imagens/marialva/fonte.jpeg"
+              alt="Fonte Manuelina"/>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title mb-3"><i class="fa-solid fa-monument"></i> Fonte Manuelina</h5>
+                <p class="card-text">
+                  Pequena fonte no arrabalde de Marialva, na Rua da Corredoura, encimada por pedra já degastada pela erosão, mas onde ainda se pode identificar a esfera armilar, elemento decorativo tipicamente usado nas construções do século XVI, no reinado de D. Manuel I.
+                </p>
+                <a href="https://aldeiashistoricasdeportugal.com/local/fonte-manuelina/" target="_blank" class="btn buttoninfo mt-auto" style="color: white; background-color: #565656;">Mais informações</a>
+              </div>
+            </div>
+          </div>
+        
+          <div class="col-sm-4 mt-3 d-flex">
+            <div class="card h-100">
+              <img class="card-img-top" src="imagens/marialva/capela.jpg"
+              alt="Capela do Senhor dos Passos" />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title mb-3"><i class="fa-solid fa-monument"></i> Capela do Senhor dos Passos</h5>
+                <p class="card-text">
+                  Situada em frente à Igreja Matriz, esta capela de estilo maneirista, tem no exterior um púlpito de onde se fazia a pregação durante as cerimónias da Quinta e Sexta-Feira de Páscoa. Construída provavelmente no séc. XVII, assiste no século seguinte à colocação dos elementos decorativos de talha dourada e policromada
+                </p>
+                <a href="https://aldeiashistoricasdeportugal.com/local/capela-do-senhor-dos-passos/" target="_blank" class="btn buttoninfo mt-auto" style="color: white; background-color: #565656;">Mais informações</a>
+              </div>
+            </div>
+          </div>
+        
+          <div class="col-sm-4 mt-3 d-flex">
+            <div class="card h-100">
+              <img class="card-img-top" src="imagens/marialva/pelourinho.jpeg"
+              alt="Pelourinho"/>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title mb-3"><i class="fa-solid fa-monument"></i> Pelourinho</h5>
+                <p class="card-text">
+                  Trata-se de um monumento de construção quinhentista, mais precisamente dos anos imediatos ao foral manuelino. O pelourinho assenta numa plataforma de quatro degraus octogonais, de aresta. Na base do monumento, num dos degraus, está inserida a data de 1559, ano provável da sua construção. Igualmente localizado no Largo da Praça este monumento foi classificado de Interesse Público em 1933.
+                </p>
+                <a href="https://aldeiashistoricasdeportugal.com/local/pelourinho/" target="_blank" class="btn buttoninfo mt-auto" style="color: white; background-color: #565656;">Mais informações</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- ONDE COMER SECTION -->
+      <section id="comer" class="row col-6 informacao justify-content-center px-0">
+        <h2 class="titulo text-center">Onde comer</h2>
+        <div class="col-sm-6 mt-3 d-flex">
+          <div class="card card-equal-height mx-auto d-flex flex-column">
+            <img class="card-img-top" src="imagens/marialva/restaurante.jpeg"
+            alt="Restaurante Pé de Cabra"/>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title"><i class="fa-solid fa-utensils"></i> Restaurante Pé de Cabra</h5>
+              <p class="card-text">
+                O local é de pequenas dimensões, mas inclui uma pequena mercearia com venda de produtos locais e produtos a granel. A lareira para os dias frios, e a esplanada para os dias amenos, completam a experiência. Aqui é surpreendido pelos sabores genuínos, combinados de uma forma moderna e genial. As Refeições são simples, mas com um toque moderno e muito saborosas. 
+              </p>
+              <p>Horário:<br>seg - dom : 12:00 - 22:00</p>
+              <a href="https://www.facebook.com/p/P%C3%A9-de-Cabra-Bistro-e-Mercearia-100071152402980/" target="_blank" class="btn buttoninfo mt-auto" style="color: white; background-color: #565656;">Mais informações</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ONDE FICAR SECTION -->
+      <section id="alojamento" class="row col-6 informacao justify-content-center px-0">
+        <h2 class="titulo text-center">Onde ficar</h2>
+        <div class="col-sm-6 mt-3 d-flex">
+          <div class="card card-equal-height mx-auto d-flex flex-column">
+            <img class="card-img-top" src="imagens/marialva/hotel.jpeg"
+            alt="Burgo House" />
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title"><i class="fa-solid fa-bed"></i> Burgo House</h5>
+              <p class="card-text">
+                Alojamento Local localizado num edifício de sec. XVIII, robusto, totalmente remodelado que tem ao seu dispor 4 apartamentos confortáveis e elegantes para que possa desfrutar da sua estadia na tranquilidade do interior de Portugal.Projetado para acolher os hóspedes num ambiente sereno e familiar, proporciona conforto e tranquilidade, envolto numa atmosfera de apontamentos históricos enquadrados com espaços modernos, para serem vividos e sentidos.
+              </p>
+              <p>Classificação: Sem classificação</p>
+              <p><i class="fa-solid fa-phone"></i> +351 962 960 945</p>
+              <a href="https://burgohouse.com/" target="_blank" class="btn buttoninfo mt-auto" style="color: white; background-color: #565656;">Mais informações</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER-->
+    <footer class="row">
+      <div id="footer" class="py-2">
+        <p id="ftext">&copy Citeforma 2024 | Raquel Sousa Marques</p>
+      </div>
+    </footer>
+  </body>
+</html>
